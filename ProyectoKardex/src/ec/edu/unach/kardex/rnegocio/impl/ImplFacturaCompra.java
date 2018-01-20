@@ -124,23 +124,23 @@ public class ImplFacturaCompra implements IFacturaCompra {
 
     @Override
     public ArrayList<FacturaCompra> obtener() throws Exception {
-        ArrayList<FacturaCompra> listFacturaCompra = new ArrayList<>();
-        String sqlC = "SELECT codFacturaCompra, fecha, codProveedor FROM FacturaCompra";
+        ArrayList<FacturaCompra> listFacturaCompra= new ArrayList<>();
+        String sqlC = "SELECT codFacturaCompra, fecha, codProveedor FROM FacturaCompra WHERE codFacturaCompra=?";
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
             ResultSet rst = con.ejecutarQuery(sqlC, null);
-           Proveedor nProveedor = null;
-           IProveedor obFC = new ImplProveedor();
+            Proveedor nProveedor = null;
+            IProveedor obProveedor = new ImplProveedor();
             while (rst.next()) {
-                FacturaCompra nFC = new FacturaCompra();
+                FacturaCompra nFacturaCompra = new FacturaCompra();
                 nProveedor = new Proveedor();
-                nFC.setCodFacturaCompra(rst.getInt(1));
-                nFC.setFecha(rst.getDate(2));
-                nProveedor = obFC.obtener(rst.getString(3));
-             //   nFC.setProveedor(nProveedor);
-                listFacturaCompra.add(nFC);
+                nFacturaCompra.setCodFacturaCompra(rst.getInt(1));
+                nFacturaCompra.setFecha(rst.getDate(2));
+                nProveedor = obProveedor.obtener(rst.getString(3));
+                nFacturaCompra.setProveedor(nProveedor);
+                listFacturaCompra.add(nFacturaCompra);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
