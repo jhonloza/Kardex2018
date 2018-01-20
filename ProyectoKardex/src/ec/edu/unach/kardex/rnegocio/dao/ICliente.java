@@ -1,7 +1,7 @@
 package ec.edu.unach.kardex.rnegocio.dao;
-
 import ec.edu.unach.kardex.rnegocio.entidades.*;
 import java.util.*;
+
 public interface ICliente {
     public int insertar (Cliente cliente) throws Exception;
     public int modificar (Cliente cliente) throws Exception; 
