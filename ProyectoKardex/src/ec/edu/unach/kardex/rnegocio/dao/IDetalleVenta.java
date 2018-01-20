@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ec.edu.unach.kardex.rnegocio.dao;
 
-/**
- *
- * @author DELL
- */
-public class IDetalleVenta {
-    
+package ec.edu.unach.kardex.rnegocio.dao;
+import java.util.*;
+
+import ec.edu.unach.kardex.rnegocio.entidades.DetalleVenta;
+
+public interface IDetalleVenta {
+    public int ingresar(DetalleVenta detalleVenta) throws Exception;
+    public int modificar(DetalleVenta detalleVenta) throws Exception;
+    public int eliminar(DetalleVenta detalleVenta) throws Exception;
+    public DetalleVenta obtener(int codDetalleVenta) throws Exception;
+    public ArrayList<DetalleVenta> obtener() throws Exception;
 }
