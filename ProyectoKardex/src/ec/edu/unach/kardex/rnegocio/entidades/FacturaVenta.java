@@ -7,12 +7,12 @@ public class FacturaVenta {
     
     private int codFacturaVenta;
     private Date fecha;
-    private String cliente;
+    private Cliente cliente;
 
     public FacturaVenta() {
     }
 
-    public FacturaVenta(int codFacturaVenta, Date fecha, String cliente) {
+    public FacturaVenta(int codFacturaVenta, Date fecha, Cliente cliente) {
         this.codFacturaVenta = codFacturaVenta;
         this.fecha = fecha;
         this.cliente = cliente;
@@ -34,14 +34,15 @@ public class FacturaVenta {
         this.fecha = fecha;
     }
 
-    public String getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(String cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
+   
     
     
     
