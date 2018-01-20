@@ -15,7 +15,7 @@ import java.util.*;
 public class FacturaCompra {
     private int codFacturaCompra;
     private Date fecha;
-    private Proveedor provedor;
+    private Proveedor proveedor;
 
     public FacturaCompra() {
     }
@@ -23,7 +23,7 @@ public class FacturaCompra {
     public FacturaCompra(int codFacturaCompra, Date fecha, Proveedor provedor) {
         this.codFacturaCompra = codFacturaCompra;
         this.fecha = fecha;
-        this.provedor = provedor;
+        this.proveedor = provedor;
     }
 
     public int getCodFacturaCompra() {
@@ -42,16 +42,13 @@ public class FacturaCompra {
         this.fecha = fecha;
     }
 
-    public Proveedor getProvedor() {
-        return provedor;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setProvedor(Proveedor provedor) {
-        this.provedor = provedor;
+    public void setProveedor(Proveedor provedor) {
+        this.proveedor = provedor;
     }
-    
-    
-  
-
+ 
     
 }
