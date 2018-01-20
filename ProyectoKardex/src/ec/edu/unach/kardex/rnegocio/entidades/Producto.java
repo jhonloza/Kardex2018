@@ -10,5 +10,8 @@ package ec.edu.unach.kardex.rnegocio.entidades;
  * @author DELL
  */
 public class Producto {
+
+    public Producto() {
+    }
     
 }
