@@ -3,20 +3,20 @@ package ec.edu.unach.kardex.rnegocio.entidades;
 
 public class DetalleVenta {
     private int codDetalleVenta;
-    private int producto;
+    private Producto producto;
     private FacturaVenta facturaVenta;
     private int cantidad;
     private double precioTotal;
 
-    public DetalleVenta() {
-    }
-
-    public DetalleVenta(int codDetalleVenta, int producto, FacturaVenta facturaVenta, int cantidad, double precioTotal) {
+    public DetalleVenta(int codDetalleVenta, Producto producto, FacturaVenta facturaVenta, int cantidad, double precioTotal) {
         this.codDetalleVenta = codDetalleVenta;
         this.producto = producto;
         this.facturaVenta = facturaVenta;
         this.cantidad = cantidad;
         this.precioTotal = precioTotal;
+    }
+
+    public DetalleVenta() {
     }
 
     public int getCodDetalleVenta() {
@@ -27,11 +27,11 @@ public class DetalleVenta {
         this.codDetalleVenta = codDetalleVenta;
     }
 
-    public int getProducto() {
+    public Producto getProducto() {
         return producto;
     }
 
-    public void setProducto(int producto) {
+    public void setProducto(Producto producto) {
         this.producto = producto;
     }
 
@@ -58,6 +58,6 @@ public class DetalleVenta {
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
     }
-    
+
     
 }
