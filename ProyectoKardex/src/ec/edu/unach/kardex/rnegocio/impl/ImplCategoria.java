@@ -14,11 +14,11 @@ public class ImplCategoria implements ICategoria{
    @Override
     public int insertar(Categoria categoria) throws Exception {
         int numFilas = 0;
-        String sqlC = "INSERT INTO Categoria (codCategoria, nombre,descripcion) VALUES (?,?,?)";
+        String sqlC = "INSERT INTO Categoria (codCategoria, nombre, descripcion) VALUES (?,?,?)";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, categoria.getCodCategoria()));
         lisParametros.add(new Parametro(2, categoria.getNombre()));
-        lisParametros.add(new Parametro(4, categoria.getDescripcion()));
+        lisParametros.add(new Parametro(3, categoria.getDescripcion()));
         Conexion con = null;
         try {
             con = new Conexion();
@@ -37,12 +37,12 @@ public class ImplCategoria implements ICategoria{
      @Override
     public int modificar(Categoria categoria) throws Exception {
         int numFilas = 0;
-        String sqlC = "UPDATE Categoria SET cosCategoria=?, nombre=?, descripcion=? WHERE codCategoria=?";
+        String sqlC = "UPDATE Categoria SET codCategoria=?, nombre=?, descripcion=? WHERE codCategoria=?";
         
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, categoria.getCodCategoria()));
         lisParametros.add(new Parametro(2, categoria.getNombre()));
-        lisParametros.add(new Parametro(4, categoria.getDescripcion()));
+        lisParametros.add(new Parametro(3, categoria.getDescripcion()));
         Conexion con = null;
         try {
             con = new Conexion();
