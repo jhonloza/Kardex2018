@@ -6,12 +6,13 @@ public class Producto {
     
     private int codProducto;
     private Categoria categoria;
-    private int nombre;
+    private String nombre;
     private Double precio;
 
     public Producto() {
     }
-      public Producto(int codProducto, Categoria categoria, int nombre, Double precio) {
+
+    public Producto(int codProducto, Categoria categoria, String nombre, Double precio) {
         this.codProducto = codProducto;
         this.categoria = categoria;
         this.nombre = nombre;
@@ -34,11 +35,11 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -49,6 +50,7 @@ public class Producto {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-      
+
+    
 }
 
