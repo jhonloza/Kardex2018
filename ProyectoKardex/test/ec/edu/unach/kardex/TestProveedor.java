@@ -43,6 +43,7 @@ public class TestProveedor {
         ArrayList<Proveedor> proveedor=new ArrayList<>();
         try {
             proveedor=proveedorDao.obtener();
+           // System.out.println("   RUC \t" + " NOMBRE\t" + " \tCREADO\t" + "\t\tACTUALIZADO\t " );
             for(Proveedor pro:proveedor){
                 System.out.println(pro.getRuc()+"\t\t\t"+pro.getNombre()+"\t\t\t"+pro.getDireccion()+"\t\t\t"+pro.getTelefono()+"\t\t\t"+pro.geteMail());
             }
