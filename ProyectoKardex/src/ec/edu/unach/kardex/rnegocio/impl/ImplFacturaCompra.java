@@ -21,7 +21,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
         } else {
             lisParametros.add(new Parametro(2, facturacompra.getFecha()));
         }
-        lisParametros.add(new Parametro(3, facturacompra.getProvedor()));
+        lisParametros.add(new Parametro(3, facturacompra.getProveedor()));
         
         Conexion con = null;
         try {
@@ -50,7 +50,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
         } else {
             lisParametros.add(new Parametro(2, facturacompra.getFecha()));
         }
-        lisParametros.add(new Parametro(3, facturacompra.getProvedor()));
+        lisParametros.add(new Parametro(3, facturacompra.getProveedor()));
         
         
         Conexion con = null;
