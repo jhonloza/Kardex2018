@@ -21,10 +21,10 @@ public class TestProveedor {
 
         int filas=0;
        
-        Proveedor nuevoProveedor=new Proveedor("1234567890", "David", "La condamine", "0991575474","david@gmail.com");
+        Proveedor nuevoProveedor=new Proveedor("101","Ana","La esperanza","123","gmailcom");
         try {
             filas=proveedorDao.ingresar(nuevoProveedor);
-            System.out.println("Filas Insertadas:"+filas+"\n\n");
+            System.out.println("Filas Insertadas:"+filas);
         } catch (Exception e) {
         }
         assertEquals(filas>0, true);
@@ -33,22 +33,23 @@ public class TestProveedor {
 
         Proveedor prove=new Proveedor();
         try {
-            prove=proveedorDao.obtener("1");
-            System.out.println(prove.getRuc()+"    "+prove.getNombre()+"    "+prove.getDireccion()+"    "+prove.getTelefono()+"     "+prove.geteMail()+"\n");
+            prove=proveedorDao.obtener("10");
+            System.out.println(prove.getRuc()+"    "+prove.getNombre()+"    "+prove.getDireccion()+"    "+prove.getTelefono()+"     "+prove.geteMail());
         } catch (Exception e) {
         }
-        
+            
 //TEST LISTADO
 
         ArrayList<Proveedor> proveedor=new ArrayList<>();
         try {
             proveedor=proveedorDao.obtener();
-           // System.out.println("   RUC \t" + " NOMBRE\t" + " \tCREADO\t" + "\t\tACTUALIZADO\t " );
+           System.out.println("RUC \t" + " \tNOMBRE\t" + " \tDIRECCION\t" + "\tTELEFONO\t "+ "\t eMail" );
             for(Proveedor pro:proveedor){
-                System.out.println(pro.getRuc()+"\t\t\t"+pro.getNombre()+"\t\t\t"+pro.getDireccion()+"\t\t\t"+pro.getTelefono()+"\t\t\t"+pro.geteMail());
+                System.out.println(pro.getRuc()+"\t\t"+pro.getNombre()+"\t\t"+pro.getDireccion()+"\t"+pro.getTelefono()+"\t"+pro.geteMail());
             }
         } catch (Exception e) {
         }
+        
         assertTrue(proveedor.size()>0);
     }
 } 
