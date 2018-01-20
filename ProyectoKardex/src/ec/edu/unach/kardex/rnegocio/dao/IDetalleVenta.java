@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.edu.unach.kardex.rnegocio.entidades;
+package ec.edu.unach.kardex.rnegocio.dao;
 
 /**
  *
  * @author DELL
  */
-public class DetalleVenta {
+public class IDetalleVenta {
     
 }
