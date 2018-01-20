@@ -30,27 +30,28 @@ public class TestCliente {
 //        }
 //        assertEquals(filas > 0, true);
         ////TEST OBTENER CODIGO
-//        Cliente cli = new Cliente();
-//
-//        try {
-//            cli = clDao.obtener("0603437047");
-//            System.out.println(cli.getCedula()+" "+cli.getNombre() +" "+ cli.getApellido()+" "+cli.getDireccion()+" "+cli.getTelefono()+" "+cli.geteMail()+" "+cli.getFechaNac());
-//        } catch (Exception e) {
-//        }
+        Cliente cli = new Cliente();
 
-        //////// TEST LISTADO 
-        ArrayList<Cliente> clientess = new ArrayList<>();
         try {
-            clientess = clDao.obtener();
-            for (Cliente clientes : clientess) {
-                System.out.println("CEDULA      " + "  NOMBRE "+ "   APELLIDO"+"DIRECCION"+"TELEFONO"+"EMAIL"+"FECHA NACIEMIENTO");
-                System.out.println(clientes.getCedula() + "    " + clientes.getNombre() + "    " + clientes.getApellido() + "      " + clientes.getDireccion() + " " + clientes.getTelefono() + "" + clientes.geteMail() + " "+ clientes.getFechaNac());
-            }
-
+            cli = clDao.obtener("0603437047");
+            System.out.println(cli.getCedula()+" "+cli.getNombre() +" "+ cli.getApellido()+" "+cli.getDireccion()+" "+cli.getTelefono()+" "+cli.geteMail()+" "+cli.getFechaNac());
         } catch (Exception e) {
         }
-        assertTrue(clientess.size() > 0);
+        
 
+        //////// TEST LISTADO 
+//        ArrayList<Cliente> clientess = new ArrayList<>();
+//        try {
+//            clientess = clDao.obtener();
+//            for (Cliente clientes : clientess) {
+//                System.out.println("CEDULA      " + "  NOMBRE "+ "   APELLIDO"+"DIRECCION"+"TELEFONO"+"EMAIL"+"FECHA NACIEMIENTO");
+//                System.out.println(clientes.getCedula() + "" + clientes.getNombre() + "" + clientes.getApellido() + "" + clientes.getDireccion() + "" + clientes.getTelefono() + "" + clientes.geteMail() + " "+ clientes.getFechaNac());
+//            }
+//
+//        } catch (Exception e) {
+//        }
+//       assertTrue(clientess.size() > 0);
+          
     }
 
 }
