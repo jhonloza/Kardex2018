@@ -91,7 +91,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
     }
 
     @Override
-    //public FacturaCompra obtener(int codFacturaCompra) throws Exception {
+    
        public FacturaCompra obtener(int facturacompra) throws Exception {
         FacturaCompra nFC = null;
         String sqlC = "SELECT codFacturaCompra, fecha, codProveedor FROM FacturaCompra WHERE codFacturaCompra=?";
@@ -103,13 +103,13 @@ public class ImplFacturaCompra implements IFacturaCompra {
             con.conectar();
             ResultSet rst = con.ejecutarQuery(sqlC, lisParametros);
             Proveedor nProveedor = null;
-  //          IProveedor obFC = new ImplProveedor();
+            IProveedor obFC = new ImplProveedor();
             while (rst.next()) {
                 nProveedor = new Proveedor();
                 nFC = new FacturaCompra();
                 nFC.setCodFacturaCompra(rst.getInt(1));
                 nFC.setFecha(rst.getDate(2));
-    //            nProveedor = obFC.obtener(rst.getInt(3));
+                nProveedor = obFC.obtener(rst.getString(3));
                
             }
         } catch (Exception e) {
@@ -132,14 +132,14 @@ public class ImplFacturaCompra implements IFacturaCompra {
             con.conectar();
             ResultSet rst = con.ejecutarQuery(sqlC, null);
            Proveedor nProveedor = null;
-   //         IProveedor obFC = new ImplProveedor();
+           IProveedor obFC = new ImplProveedor();
             while (rst.next()) {
                 FacturaCompra nFC = new FacturaCompra();
                 nProveedor = new Proveedor();
                 nFC.setCodFacturaCompra(rst.getInt(1));
                 nFC.setFecha(rst.getDate(2));
-   //             nProveedor = obFC.obtener(rst.getInt(3));
-   //             nFC.setProveedor(nProveedor);
+                nProveedor = obFC.obtener(rst.getString(3));
+             //   nFC.setProveedor(nProveedor);
                 listFacturaCompra.add(nFC);
             }
         } catch (Exception e) {
