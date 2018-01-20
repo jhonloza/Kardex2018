@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.edu.unach.kardex.rnegocio.dao;
 
-/**
- *
- * @author Davidssito Campos
- */
+import ec.edu.unach.kardex.rnegocio.entidades.*;
+import java.util.*;
 public interface IFacturaCompra {
+    public int insertar (FacturaCompra facturacompra) throws Exception;
+    public int modificar (FacturaCompra facturacompra) throws Exception; 
+    public int eliminar (FacturaCompra facturacompra) throws Exception;
+    public FacturaCompra obtener (int codFacturaCompra) throws Exception;
+    public ArrayList<FacturaCompra> obtener() throws Exception;
     
 }
