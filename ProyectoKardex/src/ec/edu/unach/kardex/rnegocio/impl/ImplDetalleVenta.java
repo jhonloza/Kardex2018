@@ -92,7 +92,7 @@ public class ImplDetalleVenta implements IDetalleVenta {
             con.conectar();
 //            IProducto productoDao = new ImplProducto();
             Producto produc = null;
-//            IFacturaVenta factVentaDao = new ImplFacturaVenta();
+            IFacturaVenta factVentaDao = new ImplFacturaVenta();
             FacturaVenta factVenta = new FacturaVenta();
             ResultSet rst = con.ejecutarQuery(sqlC, lisParametros);
             while (rst.next()) {
@@ -102,7 +102,7 @@ public class ImplDetalleVenta implements IDetalleVenta {
                 detalle.setCodDetalleVenta(rst.getInt(1));
 //                produc = productoDao.obtener(rst.getInt(2));
                 detalle.getProducto();
-//                factVenta = factVentaDao.obtener(rst.getInt(3));
+                factVenta = factVentaDao.obtener(rst.getInt(3));
                 detalle.setCantidad(rst.getInt(4));
                 detalle.setPrecioTotal(rst.getDouble(5));
             }
@@ -127,7 +127,7 @@ public class ImplDetalleVenta implements IDetalleVenta {
             con.conectar();
 //            IProducto productoDao = new ImplProducto();
             Producto produc = null;
-//            IFacturaVenta factVentaDao = new ImplFacturaVenta();
+            IFacturaVenta factVentaDao = new ImplFacturaVenta();
             FacturaVenta factVenta = new FacturaVenta();
             ResultSet rst = con.ejecutarQuery(sqlC, null);
             while (rst.next()) {
@@ -137,7 +137,7 @@ public class ImplDetalleVenta implements IDetalleVenta {
                 detalle.setCodDetalleVenta(rst.getInt(1));
 //                produc = productoDao.obtener(rst.getInt(2));
                 detalle.getProducto();
-//                factVenta = factVentaDao.obtener(rst.getInt(3));
+                factVenta = factVentaDao.obtener(rst.getInt(3));
                 detalle.setCantidad(rst.getInt(4));
                 detalle.setPrecioTotal(rst.getDouble(5));
                 lstDetalle.add(detalle);
