@@ -13,7 +13,7 @@ public class ImplFacturaVenta implements IFacturaVenta {
     @Override
     public int insertar(FacturaVenta facturaventa) throws Exception {
         int numFilas = 0;
-        String sqlC = "INSERT INTO FacturaVenta (codFacturaVentas, fecha, cliente) VALUES (?,?,?) ";
+        String sqlC = "INSERT INTO FacturaVenta (codFacturaVenta, fecha, cliente) VALUES (?,?,?) ";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, facturaventa.getCodFacturaVenta()));
         if (facturaventa.getFecha() instanceof java.util.Date) {
@@ -21,7 +21,7 @@ public class ImplFacturaVenta implements IFacturaVenta {
         } else {
             lisParametros.add(new Parametro(2, facturaventa.getFecha()));
         }
-        lisParametros.add(new Parametro(3, facturaventa.getCliente()));
+        lisParametros.add(new Parametro(3, facturaventa.getCliente().getCedula()));
 
         Conexion con = null;
         try {
@@ -90,7 +90,7 @@ public class ImplFacturaVenta implements IFacturaVenta {
     @Override
     public FacturaVenta obtener(int codFacturaVenta) throws Exception {
         FacturaVenta fv = null;
-        String sqlC = "SELECT codFacturaVenta, fecha, cliente from FacturaVenta ";
+        String sqlC = "SELECT codFacturaVenta, fecha, cliente from FacturaVenta WHERE codFacturaVenta=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, codFacturaVenta));
         Conexion con = null;
@@ -150,5 +150,4 @@ public class ImplFacturaVenta implements IFacturaVenta {
         }
         return  lstfv;
     }
-
 }

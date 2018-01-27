@@ -38,7 +38,7 @@ public class TestFacturaCompra {
 //            System.out.println("Error: " + e.getMessage());
 //        }
 //        
-//        assertTrue(filas > 0,true);
+//        assertTrue(filas > 0);
         
         /// listar por codigo test
         
@@ -52,20 +52,20 @@ public class TestFacturaCompra {
             System.out.println("error: " + e.getMessage());
         }
         
-        assertEquals(fa != null, true );
+     /////   assertEquals(fa != null, true );
         //////test listado
         
         ArrayList<FacturaCompra> fac = new ArrayList<>();
         try {
             fac = FacComDao.obtener();
             for (FacturaCompra far : fac ){
-                 System.out.println(fa.getCodFacturaCompra()+""+fa.getFecha()+""+fa.getProveedor().getRuc());
+                 System.out.println(fa.getCodFacturaCompra()+" "+fa.getFecha()+" "+fa.getProveedor().getRuc());
             }
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
             
         }
-        
+        assertTrue(fac.size()>0);
         
 
     }
