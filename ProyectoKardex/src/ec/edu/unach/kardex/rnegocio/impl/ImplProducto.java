@@ -3,8 +3,11 @@ package ec.edu.unach.kardex.rnegocio.impl;
 import ec.edu.unach.kardex.accesodatos.Conexion;
 import ec.edu.unach.kardex.accesodatos.Parametro;
 import ec.edu.unach.kardex.rnegocio.dao.ICategoria;
+import ec.edu.unach.kardex.rnegocio.dao.ICliente;
 import ec.edu.unach.kardex.rnegocio.dao.IProducto;
 import ec.edu.unach.kardex.rnegocio.entidades.Categoria;
+import ec.edu.unach.kardex.rnegocio.entidades.Cliente;
+import ec.edu.unach.kardex.rnegocio.entidades.FacturaVenta;
 import ec.edu.unach.kardex.rnegocio.entidades.Producto;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -38,7 +41,8 @@ public class ImplProducto implements IProducto{
 
     @Override
     public Producto obtener(int codProducto) throws Exception {
-        Producto producto = null;
+        
+        Producto pro = null;
         String sqlC = "SELECT codProducto, codCategoria, nombre, precio FROM Producto Where codProducto=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, codProducto));
@@ -46,17 +50,17 @@ public class ImplProducto implements IProducto{
         try {
             con = new Conexion();
             con.conectar();
-            Categoria categoria = null; 
-            ICategoria categoriaDao=new ImplCategoria();
+            ICategoria clDao = new ImplCategoria();
+            Categoria ca = null;
             ResultSet rst = con.ejecutarQuery(sqlC, lisParametros);
             while (rst.next()) {
-                producto = new Producto();
-                categoria = new Categoria();
-                producto.setCodProducto(rst.getInt(1));
-                producto.getCategoria();
-                categoria = categoriaDao.obtener(rst.getInt(2));
-                producto.setNombre(rst.getString(3));
-                producto.setPrecio(rst.getDouble(4));
+                pro = new Producto();
+                ca = new Categoria();
+                pro.setCodProducto(rst.getInt(1));
+                ca = clDao.obtener(rst.getInt(2));
+                pro.setCategoria(ca);
+                pro.setNombre(rst.getString(3));
+                pro.setPrecio(rst.getDouble(4));
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -65,7 +69,8 @@ public class ImplProducto implements IProducto{
                 con.desconectar();
             }
         }
-        return producto; 
+        return pro;
+
     }
 
 
@@ -119,36 +124,33 @@ public class ImplProducto implements IProducto{
   
      @Override
     public ArrayList<Producto> obtener() throws Exception {
-        ArrayList<Producto> lstProducto=new ArrayList<>();
-        Producto producto = null;
-        String sqlC = "SELECT codProducto, codCategoria, nombre, precio FROM Producto";
+        Producto pro = null;
+        String sqlC = "select codProducto, codCategoria, nombre, precio from Producto";
+        ArrayList<Producto> lstpro = new ArrayList<>();
         Conexion con = null;
-        try {
+        try{
             con = new Conexion();
             con.conectar();
-            Categoria categoria = null; 
-            ICategoria categoriaDao=new ImplCategoria();
             ResultSet rst = con.ejecutarQuery(sqlC, null);
-            while (rst.next()) {
-                producto = new Producto();
-                categoria = new Categoria();
-                producto.setCodProducto(rst.getInt(1));
-                producto.getCategoria();
-                categoria = categoriaDao.obtener(rst.getInt(2));
-                producto.setNombre(rst.getString(3));
-                producto.setPrecio(rst.getDouble(4));
-            
-                lstProducto.add(producto);
+            while(rst.next()){
+                ICategoria clDao = new ImplCategoria();
+                Categoria cl = null;
+                pro = new Producto();
+                pro.setCodProducto(rst.getInt(1));
+                cl = clDao.obtener(rst.getInt(2));
+                pro.setCategoria(cl);
+                pro.setNombre(rst.getString(3));
+                pro.setPrecio(rst.getDouble(4));
+                lstpro.add(pro);
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         } finally {
+            
             if (con != null) {
                 con.desconectar();
             }
         }
-        return lstProducto;
+        return  lstpro;
     }
-
-    
 }
