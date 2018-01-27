@@ -21,7 +21,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
         } else {
             lisParametros.add(new Parametro(2, facturacompra.getFecha()));
         }
-        lisParametros.add(new Parametro(3, facturacompra.getProveedor()));
+        lisParametros.add(new Parametro(3, facturacompra.getProveedor().getRuc()));
         
         Conexion con = null;
         try {
@@ -110,7 +110,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
                 nFC.setCodFacturaCompra(rst.getInt(1));
                 nFC.setFecha(rst.getDate(2));
                 nProveedor = obFC.obtener(rst.getString(3));
-               
+                nFC.setProveedor(nProveedor);               
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

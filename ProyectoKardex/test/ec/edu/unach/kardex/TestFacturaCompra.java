@@ -26,19 +26,19 @@ public class TestFacturaCompra {
         IFacturaCompra FacComDao = new ImplFacturaCompra();
 
         // TEST INSERETAR 
-        int filas = 0;
-
-        Proveedor pro = new Proveedor("", "", "", "", "");
-        FacturaCompra fc = new FacturaCompra(1, new java.util.Date(), pro);
-
-        try {
-            filas = FacComDao.insertar(fc);
-            System.out.println("Filas insertadas: " + filas);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        
-        assertEquals(filas > 0,true);
+//        int filas = 0;
+//
+//        Proveedor pro = new Proveedor("10", "Jaun","La condamine", "123456", "gmail.com");
+//        FacturaCompra fc = new FacturaCompra(1, new java.util.Date(), pro);
+//
+//        try {
+//            filas = FacComDao.insertar(fc);
+//            System.out.println("Filas insertadas: " + filas);
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//        
+//        assertTrue(filas > 0,true);
         
         /// listar por codigo test
         
@@ -46,7 +46,7 @@ public class TestFacturaCompra {
         
         try {
             fa = FacComDao.obtener(1);
-            System.out.println(fa.getCodFacturaCompra()+""+fa.getFecha()+""+fa.getProveedor().getRuc());
+            System.out.println(fa.getCodFacturaCompra()+"   "+fa.getFecha()+"    "+fa.getProveedor().getRuc());
                     
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
