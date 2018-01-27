@@ -1,4 +1,5 @@
 package ec.edu.unach.kardex.rnegocio.impl;
+
 import ec.edu.unach.kardex.accesodatos.*;
 import ec.edu.unach.kardex.rnegocio.dao.*;
 import ec.edu.unach.kardex.rnegocio.entidades.*;
@@ -7,22 +8,24 @@ import java.sql.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 public class ImplFacturaCompra implements IFacturaCompra {
+
     @Override
     public int insertar(FacturaCompra facturacompra) throws Exception {
         int numFilas = 0;
         String sqlC = "INSERT INTO FacturaCompra (codFacturaCompra,fecha, codProveedor) VALUES (?,?,?)";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
-       
+
         lisParametros.add(new Parametro(1, facturacompra.getCodFacturaCompra()));
-        
+
         if (facturacompra.getFecha() instanceof java.util.Date) {
             lisParametros.add(new Parametro(2, new java.sql.Date(((java.util.Date) facturacompra.getFecha()).getTime())));
         } else {
             lisParametros.add(new Parametro(2, facturacompra.getFecha()));
         }
         lisParametros.add(new Parametro(3, facturacompra.getProveedor().getRuc()));
-        
+
         Conexion con = null;
         try {
             con = new Conexion();
@@ -44,15 +47,14 @@ public class ImplFacturaCompra implements IFacturaCompra {
         String sqlC = "UPDATE FacturaCompra SET codFacturaCompra=?, fecha=?, codProveedor=? WHERE codFacturaCompra=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, facturacompra.getCodFacturaCompra()));
-        
+
         if (facturacompra.getFecha() instanceof java.util.Date) {
             lisParametros.add(new Parametro(2, new java.sql.Date(((java.util.Date) facturacompra.getFecha()).getTime())));
         } else {
             lisParametros.add(new Parametro(2, facturacompra.getFecha()));
         }
         lisParametros.add(new Parametro(3, facturacompra.getProveedor()));
-        
-        
+
         Conexion con = null;
         try {
             con = new Conexion();
@@ -74,7 +76,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
         String sqlC = "DELETE FROM FacturaCompra  WHERE codFacturaCompra=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, facturacompra.getCodFacturaCompra()));
-        
+
         Conexion con = null;
         try {
             con = new Conexion();
@@ -91,8 +93,8 @@ public class ImplFacturaCompra implements IFacturaCompra {
     }
 
     @Override
-    
-       public FacturaCompra obtener(int facturacompra) throws Exception {
+
+    public FacturaCompra obtener(int facturacompra) throws Exception {
         FacturaCompra nFC = null;
         String sqlC = "SELECT codFacturaCompra, fecha, codProveedor FROM FacturaCompra WHERE codFacturaCompra=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
@@ -110,7 +112,7 @@ public class ImplFacturaCompra implements IFacturaCompra {
                 nFC.setCodFacturaCompra(rst.getInt(1));
                 nFC.setFecha(rst.getDate(2));
                 nProveedor = obFC.obtener(rst.getString(3));
-                nFC.setProveedor(nProveedor);               
+                nFC.setProveedor(nProveedor);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -124,23 +126,25 @@ public class ImplFacturaCompra implements IFacturaCompra {
 
     @Override
     public ArrayList<FacturaCompra> obtener() throws Exception {
-        ArrayList<FacturaCompra> listFacturaCompra= new ArrayList<>();
-        String sqlC = "SELECT codFacturaCompra, fecha, codProveedor FROM FacturaCompra WHERE codFacturaCompra=?";
+        FacturaCompra ef = null;
+        ArrayList<FacturaCompra> listFacturaCompra = new ArrayList<>();
+        String sqlC = "SELECT codFacturaCompra, fecha, codProveedor FROM FacturaCompra ";
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
+  
             ResultSet rst = con.ejecutarQuery(sqlC, null);
-            Proveedor nProveedor = null;
-            IProveedor obProveedor = new ImplProveedor();
             while (rst.next()) {
-                FacturaCompra nFacturaCompra = new FacturaCompra();
+                IProveedor obProveedor = new ImplProveedor();
+                Proveedor nProveedor = null;
+                ef = new FacturaCompra();
                 nProveedor = new Proveedor();
-                nFacturaCompra.setCodFacturaCompra(rst.getInt(1));
-                nFacturaCompra.setFecha(rst.getDate(2));
+                ef.setCodFacturaCompra(rst.getInt(1));
+                ef.setFecha(rst.getDate(2));
                 nProveedor = obProveedor.obtener(rst.getString(3));
-                nFacturaCompra.setProveedor(nProveedor);
-                listFacturaCompra.add(nFacturaCompra);
+                ef.setProveedor(nProveedor);
+                listFacturaCompra.add(ef);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
