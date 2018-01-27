@@ -1,35 +1,57 @@
+package ec.edu.unach.kardex;
 
-//package ec.edu.unach.kardex;
+import ec.edu.unach.kardex.rnegocio.dao.*;
+import ec.edu.unach.kardex.rnegocio.entidades.*;
+import ec.edu.unach.kardex.rnegocio.impl.*;
+import java.util.ArrayList;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.*;
+import java.sql.*;
+
+public class TestDetalledeventa {
+
+    @Test
+    public void testGeneral() {
+        IDetalleVenta deveDao = new ImplDetalleVenta();
+        /////////INSERTAR TEST
+        int filas = 0;
+
+//        Categoria ca = new Categoria(1, "ABC", "Cuadernoss");
+//        Producto producto = new Producto(1, ca, "Universitario", 1.25);
+//        Cliente cli = new Cliente("1234567890", "David", "Campps", "La condamine", "0991575474", "jc@gmail.com", new java.util.Date());
+//        FacturaVenta facturaventa = new FacturaVenta(1, new java.util.Date(), cli);
+//        DetalleVenta detalleventa = new DetalleVenta(1, producto, facturaventa, 1, 2);
 //
-//import ec.edu.unach.kardex.rnegocio.dao.ICategoria;
-//import ec.edu.unach.kardex.rnegocio.dao.IDetalleVenta;
-//import ec.edu.unach.kardex.rnegocio.entidades.Categoria;
-//import ec.edu.unach.kardex.rnegocio.impl.ImplCategoria;
-//import ec.edu.unach.kardex.rnegocio.impl.ImplDetalleVenta;
-//import java.util.ArrayList;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//
-//public class TestDetalledeventa {
-//   @Test
-//    public void testGeneral() {
-//        IDetalleVenta deveDao = new ImplDetalleVenta();
-        ///////////INSERTAR TEST
-//        int filas = 0;
-//
-//         Producto  producto = new Producto(1, "Bryan", new java.util.Date(), new java.util.Date());
-//         FacturaVenta facturaventa = new FacturaVenta(1, "Michu", new java.util.Date(), new java.util.Date());
-//        DetalleVenta detalleventa = new DetalleVenta(1,20,3);
-//       
-//
-//        try {
-//            filas = deveDao.insertar(per);
+//        try {                                                                  
+//            filas = deveDao.ingresar(detalleventa);
 //            System.out.println("Filas insertadas: " + filas);
 //        } catch (Exception e) {
 //            System.out.println("Error: " + e.getMessage());
 //        }
-//        assertEquals(filas > 0, true);  
+//        assertTrue(filas > 0);
 
-//    }
-//}
-//    
+        //////////////////////////////// obtener por codigo 
+//        DetalleVenta dt = new DetalleVenta();
+//
+//        try {
+//            dt = deveDao.obtener(1);
+//            System.out.println(dt.getCodDetalleVenta() + " " + dt.getProducto().getCodProducto() + " " + dt.getFacturaVenta().getCodFacturaVenta() + " " + dt.getCantidad() + " " + dt.getPrecioTotal());
+//        } catch (Exception e) {
+//            System.out.println("error: " + e.getMessage());
+//        }
+        ////assertEquals(dt != null, true);
+        /// revisar esto ..!!!!
+//////////        ArrayList<DetalleVenta> det = new ArrayList<>();
+//////////        try {
+//////////            det = deveDao.obtener();
+//////////            for (DetalleVenta deta : det) {
+//////////                System.out.println(deta.getCodDetalleVenta() + " " + deta.getProducto().getCodProducto() + " " + deta.getFacturaVenta().getCodFacturaVenta() + " " + deta.getCantidad() + " " + deta.getPrecioTotal());
+//////////            }
+//////////        } catch (Exception e) {
+//////////            System.out.println("error: " + e.getMessage());
+//////////        }
+//////////        
+//////////         assertTrue(det.size()>0);
+    }
+}

@@ -83,14 +83,14 @@ public class ImplDetalleVenta implements IDetalleVenta {
     @Override
     public DetalleVenta obtener(int codDetalleVenta) throws Exception {
         DetalleVenta detalle = null;
-        String sqlC = "SELECT codDetalleVenta, codProducto, codFacturaVenta, cantidad, precioTotal FROM DetalleVenta Where id=?";
+        String sqlC = "SELECT codDetalleVenta, codProducto, codFacturaVenta, cantidad, precioTotal FROM DetalleVenta Where codDetalleVenta=?";
         ArrayList<Parametro> lisParametros = new ArrayList<>();
         lisParametros.add(new Parametro(1, codDetalleVenta));
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
-//            IProducto productoDao = new ImplProducto();
+            IProducto productoDao = new ImplProducto();
             Producto produc = null;
             IFacturaVenta factVentaDao = new ImplFacturaVenta();
             FacturaVenta factVenta = new FacturaVenta();
@@ -100,9 +100,10 @@ public class ImplDetalleVenta implements IDetalleVenta {
                 produc = new Producto();
                 factVenta = new FacturaVenta();
                 detalle.setCodDetalleVenta(rst.getInt(1));
-//                produc = productoDao.obtener(rst.getInt(2));
-                detalle.getProducto();
+                produc = productoDao.obtener(rst.getInt(2));
+                detalle.setProducto(produc);
                 factVenta = factVentaDao.obtener(rst.getInt(3));
+                detalle.setFacturaVenta(factVenta);
                 detalle.setCantidad(rst.getInt(4));
                 detalle.setPrecioTotal(rst.getDouble(5));
             }
@@ -118,26 +119,29 @@ public class ImplDetalleVenta implements IDetalleVenta {
 
     @Override
     public ArrayList<DetalleVenta> obtener() throws Exception {
-        ArrayList<DetalleVenta> lstDetalle=new ArrayList<>();
+        DetalleVenta dec = null;
+        ArrayList<DetalleVenta> lstDetalle = new ArrayList<>();
         DetalleVenta detalle = null;
         String sqlC = "SELECT codDetalleVenta, codProducto, codFacturaVenta, cantidad, precioTotal FROM DetalleVenta";
         Conexion con = null;
         try {
             con = new Conexion();
             con.conectar();
-//            IProducto productoDao = new ImplProducto();
-            Producto produc = null;
-            IFacturaVenta factVentaDao = new ImplFacturaVenta();
-            FacturaVenta factVenta = new FacturaVenta();
+
             ResultSet rst = con.ejecutarQuery(sqlC, null);
             while (rst.next()) {
-                detalle = new DetalleVenta();
+                IProducto productoDao = new ImplProducto();
+                Producto produc = null;
+                IFacturaVenta factVentaDao = new ImplFacturaVenta();
+                FacturaVenta fc = null;
+                dec = new DetalleVenta();               
                 produc = new Producto();
-                factVenta = new FacturaVenta();
-                detalle.setCodDetalleVenta(rst.getInt(1));
-//                produc = productoDao.obtener(rst.getInt(2));
-                detalle.getProducto();
-                factVenta = factVentaDao.obtener(rst.getInt(3));
+                fc = new FacturaVenta();
+                dec.setCodDetalleVenta(rst.getInt(1));
+                produc = productoDao.obtener(rst.getInt(2));
+                dec.setProducto(produc);
+                fc = factVentaDao.obtener(rst.getInt(3));
+                dec.setFacturaVenta(fc);
                 detalle.setCantidad(rst.getInt(4));
                 detalle.setPrecioTotal(rst.getDouble(5));
                 lstDetalle.add(detalle);
