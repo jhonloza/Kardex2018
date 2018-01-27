@@ -27,7 +27,7 @@ public class TestProveedor {
             System.out.println("Filas Insertadas:"+filas);
         } catch (Exception e) {
         }
-        assertEquals(filas>0, true);
+        assertTrue(filas>0);
         
 //TEST OBTENER POR CODIGO
 
@@ -36,7 +36,9 @@ public class TestProveedor {
             prove=proveedorDao.obtener("10");
             System.out.println(prove.getRuc()+"    "+prove.getNombre()+"    "+prove.getDireccion()+"    "+prove.getTelefono()+"     "+prove.geteMail());
         } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
         }
+        assertEquals(prove!=null, true);
             
 //TEST LISTADO
 
@@ -48,8 +50,8 @@ public class TestProveedor {
                 System.out.println(pro.getRuc()+"\t\t"+pro.getNombre()+"\t\t"+pro.getDireccion()+"\t"+pro.getTelefono()+"\t"+pro.geteMail());
             }
         } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
         }
-        
         assertTrue(proveedor.size()>0);
     }
 } 
