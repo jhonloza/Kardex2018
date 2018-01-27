@@ -39,7 +39,7 @@ public class TestFacturaVenta {
             System.out.println(facvent.getCodFacturaVenta()+"     "+facvent.getFecha()+ "    " + facvent.getCliente().getCedula()+"\n\n");
         } catch (Exception e) {
         }
-   //    assertEquals(facvent != null, true);
+      //assertEquals(facvent != null, true);
         
 ////TEST LISTADO
         
