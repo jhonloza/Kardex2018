@@ -10,6 +10,63 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ImplProducto implements IProducto{
+    
+    @Override
+    public int insertar(Producto producto) throws Exception {
+         int numFilas = 0;
+        String sqlC = "INSERT INTO Producto (codProducto, codCategoria, nombre , precio) VALUES (?,?,?,?)";
+        ArrayList<Parametro> lisParametros = new ArrayList<>();
+        lisParametros.add(new Parametro(1, producto.getCodProducto()));
+        lisParametros.add(new Parametro(2, producto.getCategoria().getCodCategoria()));
+        lisParametros.add(new Parametro(3, producto.getNombre()));
+        lisParametros.add(new Parametro(4, producto.getPrecio()));
+        Conexion con = null;
+        try {
+            con = new Conexion();
+            con.conectar();
+            numFilas = con.ejecutarComando(sqlC, lisParametros);
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+        } finally {
+            if (con != null) {
+                con.desconectar();
+            }
+        }
+        return numFilas;
+
+    }
+
+    @Override
+    public Producto obtener(int codProducto) throws Exception {
+        Producto producto = null;
+        String sqlC = "SELECT codProducto, codCategoria, nombre, precio FROM Producto Where codProducto=?";
+        ArrayList<Parametro> lisParametros = new ArrayList<>();
+        lisParametros.add(new Parametro(1, codProducto));
+        Conexion con = null;
+        try {
+            con = new Conexion();
+            con.conectar();
+            Categoria categoria = null; 
+            ICategoria categoriaDao=new ImplCategoria();
+            ResultSet rst = con.ejecutarQuery(sqlC, lisParametros);
+            while (rst.next()) {
+                producto = new Producto();
+                categoria = new Categoria();
+                producto.setCodProducto(rst.getInt(1));
+                producto.getCategoria();
+                categoria = categoriaDao.obtener(rst.getInt(2));
+                producto.setNombre(rst.getString(3));
+                producto.setPrecio(rst.getDouble(4));
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            if (con != null) {
+                con.desconectar();
+            }
+        }
+        return producto; 
+    }
 
 
 @Override
@@ -93,59 +150,5 @@ public class ImplProducto implements IProducto{
         return lstProducto;
     }
 
-    @Override
-    public int insertar(Producto producto) throws Exception {
-         int numFilas = 0;
-        String sqlC = "INSERT INTO Producto (codProducto, codCategoria, nombre , precio) VALUES (?,?,?,?)";
-        ArrayList<Parametro> lisParametros = new ArrayList<>();
-        lisParametros.add(new Parametro(1, producto.getCodProducto()));
-        lisParametros.add(new Parametro(2, producto.getCategoria().getCodCategoria()));
-        lisParametros.add(new Parametro(4, producto.getNombre()));
-        lisParametros.add(new Parametro(5, producto.getPrecio()));
-        Conexion con = null;
-        try {
-            con = new Conexion();
-            con.conectar();
-            numFilas = con.ejecutarComando(sqlC, lisParametros);
-        } catch (Exception e) {
-            System.out.println("error: " + e.getMessage());
-        } finally {
-            if (con != null) {
-                con.desconectar();
-            }
-        }
-        return numFilas;
-
-    }
-
-    @Override
-    public Producto obtener(int codProducto) throws Exception {
-        Producto producto = null;
-        String sqlC = "SELECT codProducto, codCategoria, nombre, precio FROM Producto Where codProducto=?";
-        ArrayList<Parametro> lisParametros = new ArrayList<>();
-        lisParametros.add(new Parametro(1, codProducto));
-        Conexion con = null;
-        try {
-            con = new Conexion();
-            con.conectar();
-            Categoria categoria = null; 
-            ICategoria categoriaDao=new ImplCategoria();
-            ResultSet rst = con.ejecutarQuery(sqlC, lisParametros);
-            while (rst.next()) {
-                producto = new Producto();
-                categoria = new Categoria();
-                producto.setCodProducto(rst.getInt(1));
-                producto.getCategoria();
-                categoria = categoriaDao.obtener(rst.getInt(2));
-                producto.setNombre(rst.getString(3));
-                producto.setPrecio(rst.getDouble(4));
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            if (con != null) {
-                con.desconectar();
-            }
-        }
-        return producto; }
+    
 }
